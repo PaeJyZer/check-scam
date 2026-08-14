@@ -1,5 +1,6 @@
 function showCustomAlert(message) {
     const existingModal = document.getElementById('custom-alert-modal');
+    
     if (existingModal) existingModal.remove();
 
     if (!document.getElementById('custom-alert-style')) {
@@ -7,7 +8,15 @@ function showCustomAlert(message) {
         styleElem.id = 'custom-alert-style';
         styleElem.innerHTML = `
             @keyframes customFadeIn { from { opacity: 0; } to { opacity: 1; } }
-            @keyframes customScaleUp { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+            @keyframes customPopGlow {
+                0% { transform: scale(0.5) translateY(-30px); opacity: 0; filter: drop-shadow(0 0 0px #ec4899); }
+                70% { transform: scale(1.05) translateY(0); opacity: 1; filter: drop-shadow(0 0 30px #ec4899); }
+                100% { transform: scale(1) translateY(0); opacity: 1; }
+            }
+            @keyframes pulseBorder {
+                0%, 100% { border-color: rgba(236, 72, 153, 0.8); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(236, 72, 153, 0.5); }
+                50% { border-color: rgba(124, 58, 237, 0.9); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 50px rgba(124, 58, 237, 0.8); }
+            }
         `;
         document.head.appendChild(styleElem);
     }
@@ -16,18 +25,17 @@ function showCustomAlert(message) {
     overlay.id = 'custom-alert-modal';
     overlay.style.cssText = `
         position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(11, 15, 25, 0.8); backdrop-filter: blur(8px);
+        background: rgba(11, 15, 25, 0.85); backdrop-filter: blur(10px);
         display: flex; justify-content: center; align-items: center; z-index: 9999;
         animation: customFadeIn 0.3s ease;
     `;
 
     const modalBox = document.createElement('div');
     modalBox.style.cssText = `
-        background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(236, 72, 153, 0.5);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(236, 72, 153, 0.25);
-        padding: 30px; border-radius: 12px; width: 400px; max-width: 90%;
-        color: #f1f5f9; font-family: 'Prompt', sans-serif; position: relative;
-        animation: customScaleUp 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        background: rgba(15, 23, 42, 0.95); border: 2px solid rgba(236, 72, 153, 0.8);
+        padding: 30px 25px; border-radius: 16px; width: 380px; max-width: 90%;
+        color: #f1f5f9; font-family: inherit; position: relative; text-align: center;
+        animation: customPopGlow 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), pulseBorder 3s infinite;
     `;
 
     const closeBtn = document.createElement('button');
@@ -40,10 +48,17 @@ function showCustomAlert(message) {
     closeBtn.onmouseout = () => closeBtn.style.color = '#94a3b8';
     closeBtn.onclick = () => overlay.remove();
 
+    const iconElem = document.createElement('div');
+    iconElem.innerHTML = '🔥';
+    iconElem.style.cssText = `
+        font-size: 42px; margin-bottom: 10px; display: inline-block;
+        filter: drop-shadow(0 0 12px #ec4899);
+    `;
+
     const textElem = document.createElement('p');
     textElem.textContent = message;
     textElem.style.cssText = `
-        margin-top: 10px; margin-bottom: 25px; font-size: 15px; line-height: 1.6; color: #f1f5f9; padding-right: 15px;
+        margin-top: 5px; margin-bottom: 25px; font-size: 16px; font-weight: 500; line-height: 1.6; color: #f1f5f9;
     `;
 
     const okBtn = document.createElement('button');
@@ -51,13 +66,14 @@ function showCustomAlert(message) {
     okBtn.style.cssText = `
         width: 100%; background: linear-gradient(135deg, #7c3aed, #ec4899); color: #ffffff;
         border: none; padding: 12px; font-size: 15px; font-weight: 600; border-radius: 8px;
-        cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+        cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4); font-family: inherit;
     `;
-    okBtn.onmouseover = () => okBtn.style.opacity = '0.9';
-    okBtn.onmouseout = () => okBtn.style.opacity = '1';
+    okBtn.onmouseover = () => { okBtn.style.opacity = '0.9'; okBtn.style.transform = 'scale(1.02)'; };
+    okBtn.onmouseout = () => { okBtn.style.opacity = '1'; okBtn.style.transform = 'scale(1)'; };
     okBtn.onclick = () => overlay.remove();
 
     modalBox.appendChild(closeBtn);
+    modalBox.appendChild(iconElem);
     modalBox.appendChild(textElem);
     modalBox.appendChild(okBtn);
     overlay.appendChild(modalBox);
@@ -117,13 +133,12 @@ function maskData(val) {
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('.form-card form');
     
-    // จัดการเพิ่มช่องชื่อสินค้าและราคา
     if (form && !document.getElementById('product-input')) {
         const extraFieldsDiv = document.createElement('div');
         extraFieldsDiv.style.cssText = 'margin-bottom: 15px; display: flex; gap: 10px; flex-wrap: wrap;';
         extraFieldsDiv.innerHTML = `
-            <input type="text" id="product-input" placeholder="ชื่อสินค้า/บริการที่โดนโกง" style="flex: 2; min-width: 180px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); padding: 10px 14px; border-radius: 8px; color: #fff; font-family: 'Prompt', sans-serif; font-size: 14px;">
-            <input type="number" id="price-input" placeholder="ราคา (บาท)" style="flex: 1; min-width: 110px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); padding: 10px 14px; border-radius: 8px; color: #fff; font-family: 'Prompt', sans-serif; font-size: 14px;">
+            <input type="text" id="product-input" placeholder="ชื่อสินค้า/บริการที่โดนโกง" style="flex: 2; min-width: 180px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); padding: 10px 14px; border-radius: 8px; color: #fff; font-family: inherit; font-size: 14px;">
+            <input type="number" id="price-input" placeholder="ราคา (บาท)" style="flex: 1; min-width: 110px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); padding: 10px 14px; border-radius: 8px; color: #fff; font-family: inherit; font-size: 14px;">
         `;
         const submitBtnElem = form.querySelector('.btn-submit');
         if (submitBtnElem) {
@@ -133,7 +148,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // จัดการเพิ่มตัวเลือก "อื่นๆ" และช่องกรอกข้อความเพิ่มเติมใน <select>
     const typeSelectElem = form ? form.querySelector('select') : null;
     let customTypeWrapper = document.getElementById('custom-type-wrapper');
 
@@ -150,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
             customTypeWrapper.id = 'custom-type-wrapper';
             customTypeWrapper.style.cssText = 'margin-bottom: 15px; display: none;';
             customTypeWrapper.innerHTML = `
-                <input type="text" id="custom-type-input" placeholder="พิมพ์ระบุประเภทการโกง..." style="width: 100%; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); padding: 10px 14px; border-radius: 8px; color: #fff; font-family: 'Prompt', sans-serif; font-size: 14px;">
+                <input type="text" id="custom-type-input" placeholder="พิมพ์ระบุประเภทการโกง..." style="width: 100%; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); padding: 10px 14px; border-radius: 8px; color: #fff; font-family: inherit; font-size: 14px;">
             `;
             typeSelectElem.parentNode.insertBefore(customTypeWrapper, typeSelectElem.nextSibling);
         }
@@ -242,24 +256,79 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
             });
 
+            if (!document.getElementById('danger-box-style')) {
+                const styleDanger = document.createElement('style');
+                styleDanger.id = 'danger-box-style';
+                styleDanger.innerHTML = `
+                    @keyframes dangerGlowPulse {
+                        0%, 100% {
+                            border-color: rgba(244, 63, 94, 0.8);
+                            box-shadow: 0 0 15px rgba(244, 63, 94, 0.4), inset 0 0 15px rgba(244, 63, 94, 0.15);
+                        }
+                        50% {
+                            border-color: rgba(236, 72, 153, 1);
+                            box-shadow: 0 0 30px rgba(236, 72, 153, 0.7), inset 0 0 25px rgba(236, 72, 153, 0.3);
+                        }
+                    }
+                `;
+                document.head.appendChild(styleDanger);
+            }
+
             alertBox.className = 'alert-box danger';
-            alertBox.style.cssText = '';
+            alertBox.style.cssText = `
+                background: linear-gradient(135deg, rgba(244, 63, 94, 0.12) 0%, rgba(15, 23, 42, 0.85) 100%);
+                border: 1px solid rgba(244, 63, 94, 0.8);
+                border-left: 4px solid #f43f5e;
+                border-radius: 12px 2px 12px 2px;
+                padding: 18px;
+                color: #f1f5f9;
+                backdrop-filter: blur(8px);
+                animation: dangerGlowPulse 2.5s infinite ease-in-out;
+                position: relative;
+                overflow: hidden;
+            `;
             alertBox.innerHTML = `
-                <p>❌ <strong>เบอร์/บัญชี: ${maskedQuery}</strong></p>
-                <p>⚠️ พบประวัติการรายงานทั้งหมด <strong>${record.count}</strong> ครั้ง!</p>
-                <div style="max-height: 220px; overflow-y: auto; margin-top: 10px; padding-right: 4px;">
+                <p style="margin:0; font-size: 15px;">❌ <strong style="color: #ffe4e6;">เบอร์/บัญชี: ${maskedQuery}</strong></p>
+                <p style="margin: 6px 0 0 0; color: #f43f5e; font-size: 14px; font-weight: 600;">⚠️ พบประวัติการรายงานทั้งหมด <span style="font-size: 18px; text-shadow: 0 0 8px rgba(244,63,94,0.8);">${record.count}</span> ครั้ง!</p>
+                <div style="max-height: 220px; overflow-y: auto; margin-top: 12px; padding-right: 4px;">
                     ${reportsHtml}
                 </div>
             `;
         } else {
+            if (!document.getElementById('safe-box-style')) {
+                const styleSafe = document.createElement('style');
+                styleSafe.id = 'safe-box-style';
+                styleSafe.innerHTML = `
+                    @keyframes safeGlowPulse {
+                        0%, 100% {
+                            border-color: rgba(16, 185, 129, 0.8);
+                            box-shadow: 0 0 15px rgba(16, 185, 129, 0.3), inset 0 0 15px rgba(16, 185, 129, 0.1);
+                        }
+                        50% {
+                            border-color: rgba(52, 211, 153, 1);
+                            box-shadow: 0 0 30px rgba(52, 211, 153, 0.6), inset 0 0 25px rgba(52, 211, 153, 0.25);
+                        }
+                    }
+                `;
+                document.head.appendChild(styleSafe);
+            }
+
             alertBox.className = 'alert-box safe';
             alertBox.style.cssText = `
-                background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.4);
-                border-left: 4px solid #10b981; border-radius: 8px; color: #6ee7b7; padding: 16px; font-size: 14px; line-height: 1.6;
+                background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(15, 23, 42, 0.85) 100%);
+                border: 1px solid rgba(16, 185, 129, 0.8);
+                border-left: 4px solid #10b981;
+                border-radius: 12px 2px 12px 2px;
+                padding: 18px;
+                color: #6ee7b7;
+                backdrop-filter: blur(8px);
+                animation: safeGlowPulse 2.5s infinite ease-in-out;
+                position: relative;
+                overflow: hidden;
             `;
             alertBox.innerHTML = `
-                <p>✅ <strong>เบอร์/บัญชี: ${maskedQuery}</strong></p>
-                <p>🛡️ ไม่พบประวัติการโกงในระบบ (เบื้องต้นปลอดภัย)</p>
+                <p style="margin: 0; font-size: 15px; color: #a7f3d0;">✅ <strong>เบอร์/บัญชี: ${maskedQuery}</strong></p>
+                <p style="margin: 6px 0 0 0; font-size: 14px; font-weight: 500;">🛡️ ไม่พบประวัติการโกงในระบบ (เบื้องต้นปลอดภัย)</p>
             `;
         }
     });
@@ -299,7 +368,7 @@ document.addEventListener('DOMContentLoaded', () => {
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            font-family: 'Prompt', sans-serif;
+            font-family: inherit;
             box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
             pointer-events: none;
             display: inline-block;
@@ -324,7 +393,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         previewContainer = document.createElement('div');
         previewContainer.className = 'preview-container';
-        // เพิ่ม margin-bottom ให้มีระยะห่างจากช่องชื่อสินค้าด้านล่าง
         previewContainer.style.cssText = `
             display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; margin-bottom: 15px; justify-content: flex-start;
         `;
@@ -466,7 +534,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const maskedTarget = maskData(targetInput);
         const newItem = document.createElement('div');
-        newItem.className = 'recent-item';
+        
+        newItem.className = 'recent-item new-report-flame';
         newItem.innerHTML = `
             <span>${timeStr}<br><small>${maskedTarget}</small></span>
             <span class="badge">${typeSelect}</span>
@@ -476,6 +545,13 @@ document.addEventListener('DOMContentLoaded', () => {
             recentCard.insertBefore(newItem, recentCard.children[1]);
         } else if (recentCard) {
             recentCard.appendChild(newItem);
+        }
+
+        if (recentCard) {
+            const recentItems = recentCard.querySelectorAll('.recent-item');
+            if (recentItems.length > 5) {
+                recentItems[recentItems.length - 1].remove();
+            }
         }
 
         showCustomAlert('ส่งรายงานเข้าระบบเรียบร้อยแล้ว');
@@ -491,4 +567,52 @@ document.addEventListener('DOMContentLoaded', () => {
         uploadedFiles = [];
         if(previewContainer) previewContainer.innerHTML = '';
     });
+
+    // === Scroll Reveal Effect สำหรับการ์ด HOW IT WORKS และ TERMS & CONDITIONS ===
+    if (!document.getElementById('scroll-reveal-style')) {
+        const styleReveal = document.createElement('style');
+        styleReveal.id = 'scroll-reveal-style';
+        styleReveal.innerHTML = `
+            .reveal-card {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+                transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+                will-change: transform, opacity;
+            }
+            .reveal-card.active {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        `;
+        document.head.appendChild(styleReveal);
+    }
+
+    const cardsToAnimate = document.querySelectorAll('.how-it-works .card, .terms-conditions .card, .how-it-works div[class*="card"], .terms div[class*="card"]');
+    const targetCards = cardsToAnimate.length > 0 ? cardsToAnimate : document.querySelectorAll('.features-grid > div, .terms-grid > div');
+
+    targetCards.forEach((card) => {
+        card.classList.add('reveal-card');
+    });
+
+    const observerOptions = {
+        root: null,
+        threshold: 0.15
+    };
+
+    const cardObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const card = entry.target;
+                const cardIndex = Array.from(targetCards).indexOf(card) % 3; 
+                
+                setTimeout(() => {
+                    card.classList.add('active');
+                }, cardIndex * 150);
+
+                observer.unobserve(card);
+            }
+        });
+    }, observerOptions);
+
+    targetCards.forEach(card => cardObserver.observe(card));
 });

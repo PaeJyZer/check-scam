@@ -1,10 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,500;0,700;1,500&family=Prompt:wght@300;400;600&family=Share+Tech+Mono&display=swap');
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Prompt', 'Share Tech Mono', sans-serif;
+    font-family: 'Chakra Petch', 'Prompt', sans-serif;
+}
+
+
+/* ช่องกรอกข้อมูลและปุ่มกด */
+.form-group input, .form-group select, .btn-submit, .btn-search {
+    font-family: 'Chakra Petch', 'Prompt', sans-serif !important;
 }
 
 html {
@@ -132,7 +138,7 @@ nav a {
     text-decoration: none;
     color: #94a3b8;
     margin-left: 20px;
-    font-size: 14px;
+    font-size: 15px;
     padding: 8px 16px;
     border-radius: 6px;
     transition: all 0.3s ease;
@@ -160,37 +166,48 @@ nav a:hover, nav a.active {
     background: rgba(15, 23, 42, 0.8);
     backdrop-filter: blur(16px);
     padding: 30px;
-    border: 1px solid rgba(124, 58, 237, 0.35);
     margin-bottom: 25px;
     position: relative;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* === สไตล์มุมตัด Sci-Fi เฉพาะ 4 กรอบหลักใน app-container === */
+/* === สไตล์มุมตัด Sci-Fi เทคโนโลยีซ้อน 2 ชั้นรองรับมือถือ === */
 .app-container .card {
+    position: relative !important;
+    background: linear-gradient(135deg, #ec4899, #7c3aed) !important;
+    border: none !important;
     border-radius: 0 !important;
-    border: 1.5px solid rgba(236, 72, 153, 0.6) !important;
-    background: rgba(15, 23, 42, 0.85) !important;
-    clip-path: polygon(
-        20px 0, 
-        100% 0, 
-        100% calc(100% - 20px), 
-        calc(100% - 20px) 100%, 
-        0 100%, 
-        0 20px
-    ) !important;
-    filter: drop-shadow(0 0 8px rgba(236, 72, 153, 0.2));
+    padding: 28px !important;
+    -webkit-clip-path: polygon(22px 0, 100% 0, 100% calc(100% - 22px), calc(100% - 22px) 100%, 0 100%, 0 22px) !important;
+    clip-path: polygon(22px 0, 100% 0, 100% calc(100% - 22px), calc(100% - 22px) 100%, 0 100%, 0 22px) !important;
+    filter: drop-shadow(0 0 10px rgba(236, 72, 153, 0.35)) !important;
     transition: all 0.3s ease !important;
 }
 
+.app-container .card::before {
+    content: "" !important;
+    position: absolute !important;
+    top: 2px !important;
+    left: 2px !important;
+    right: 2px !important;
+    bottom: 2px !important;
+    background: #0d1322 !important;
+    -webkit-clip-path: polygon(21px 0, 100% 0, 100% calc(100% - 21px), calc(100% - 21px) 100%, 0 100%, 0 21px) !important;
+    clip-path: polygon(21px 0, 100% 0, 100% calc(100% - 21px), calc(100% - 21px) 100%, 0 100%, 0 21px) !important;
+    z-index: 1 !important;
+}
+
+.app-container .card > * {
+    position: relative !important;
+    z-index: 2 !important;
+}
+
 .app-container .card:hover {
-    border-color: #ec4899 !important;
-    filter: drop-shadow(0 0 15px rgba(236, 72, 153, 0.5)) !important;
+    filter: drop-shadow(0 0 18px rgba(236, 72, 153, 0.75)) !important;
     transform: translateY(-3px) !important;
 }
 
 h2, h3 {
-    font-size: 20px;
+    font-size: 21px;
     font-weight: 700;
     margin-bottom: 20px;
     color: #ffffff;
@@ -222,8 +239,13 @@ h2, h3 {
     width: 100%;
     padding: 14px;
     outline: none;
-    font-size: 15px;
+    font-size: 16px;
     color: #ffffff;
+}
+
+.search-box input::placeholder {
+    font-family: 'Sarabun', sans-serif;
+    color: #64748b;
 }
 
 .btn-search {
@@ -251,7 +273,7 @@ h2, h3 {
     border-radius: 8px;
     color: #fda4af;
     padding: 16px;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.6;
     animation: alert-pulse 2s infinite alternate;
 }
@@ -268,15 +290,15 @@ h2, h3 {
     align-items: stretch;
     gap: 7px;
     margin-bottom: 22px;
-    font-size: 14px;
+    font-size: 15px;
     color: #cbd5e1;
 }
 
 .form-group > label {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 10.5px;
-    font-weight: 400;
-    letter-spacing: 2px;
+    font-family: 'Share Tech Mono', 'Sarabun', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
     text-transform: uppercase;
     color: #a78bfa;
     display: flex;
@@ -294,14 +316,14 @@ h2, h3 {
         linear-gradient(135deg, rgba(124, 58, 237, 0.5), rgba(236, 72, 153, 0.5)) border-box;
     color: #ffffff;
     outline: none;
-    font-size: 14px;
+    font-size: 15px;
     transition: box-shadow 0.3s ease, background 0.3s ease, transform 0.2s ease;
 }
 
 .form-group input::placeholder {
     color: #64748b;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 12px;
+    font-family: 'Sarabun', sans-serif;
+    font-size: 14px;
 }
 
 .form-group input:focus, .form-group select:focus {
@@ -354,7 +376,7 @@ h2, h3 {
     align-items: center;
     padding: 14px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .recent-item small {
@@ -367,7 +389,7 @@ h2, h3 {
     border: 1px solid rgba(124, 58, 237, 0.4);
     padding: 4px 12px;
     font-weight: 600;
-    font-size: 11px;
+    font-size: 12px;
     border-radius: 20px;
     animation: badge-pulse 3s ease-in-out infinite;
 }
@@ -396,7 +418,7 @@ h2, h3 {
 }
 
 .info-header .section-tag {
-    font-family: 'Share Tech Mono', monospace;
+    font-family: 'Share Tech Mono', 'Sarabun', monospace;
     color: #ec4899;
     font-size: 70px;
     font-weight: 600;
@@ -428,10 +450,12 @@ h2, h3 {
     padding: 30px 25px;
     border: 1px solid transparent;
     border-radius: 0;
+    position: relative !important;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
 }
 
 .step-title {
-    font-size: 18px;
+    font-size: 19px;
     font-weight: 700;
     color: #ffffff;
     margin-bottom: 12px;
@@ -439,13 +463,13 @@ h2, h3 {
 }
 
 .step-item p, .terms-item p {
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.6;
     color: #94a3b8;
 }
 
 .terms-num {
-    font-family: 'Share Tech Mono', monospace;
+    font-family: 'Share Tech Mono', 'Sarabun', monospace;
     color: #ec4899;
     font-size: 18px;
     letter-spacing: 1.5px;
@@ -453,14 +477,8 @@ h2, h3 {
     display: block;
 }
 
-/* === Hover & Sparkle === */
-.card, .step-item, .terms-item {
-    position: relative !important;
-    clip-path: none;
-    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
-}
-
-.card::before, .step-item::before, .terms-item::before {
+/* === Hover & Sparkle เฉพาะการ์ดล่าง === */
+.step-item::before, .terms-item::before {
     content: "✦";
     position: absolute;
     top: -10px;
@@ -475,7 +493,7 @@ h2, h3 {
     z-index: 10;
 }
 
-.card::after, .step-item::after, .terms-item::after {
+.step-item::after, .terms-item::after {
     content: "✦";
     position: absolute;
     bottom: -10px;
@@ -498,12 +516,12 @@ h2, h3 {
     z-index: 5 !important;
 }
 
-.card:hover::before, .step-item:hover::before, .terms-item:hover::before {
+.step-item:hover::before, .terms-item:hover::before {
     opacity: 1;
     animation: starSparkle 1s infinite alternate ease-in-out;
 }
 
-.card:hover::after, .step-item:hover::after, .terms-item:hover::after {
+.step-item:hover::after, .terms-item:hover::after {
     opacity: 1;
     animation: starSparkle 1s infinite alternate ease-in-out 0.5s;
 }
@@ -581,18 +599,13 @@ select option:hover, select option:focus, select option:checked {
     nav a {
         margin: 0 !important;
         padding: 6px 10px !important;
-        font-size: 12px !important;
+        font-size: 13px !important;
         white-space: nowrap !important;
     }
 
     .app-container, .info-sections {
         padding: 0 12px !important;
         margin: 15px auto !important;
-    }
-
-    .card {
-        padding: 16px !important;
-        margin-bottom: 15px !important;
     }
 
     .search-box {
@@ -602,7 +615,7 @@ select option:hover, select option:focus, select option:checked {
 
     .search-box input {
         padding: 10px !important;
-        font-size: 13px !important;
+        font-size: 14px !important;
         flex: 1 !important;
         min-width: 0 !important;
     }
@@ -617,6 +630,55 @@ select option:hover, select option:focus, select option:checked {
     }
 
     .info-header h2 {
-        font-size: 18px !important;
+        font-size: 20px !important;
     }
+}
+
+/* === เอฟเฟกต์เปลวไฟระเบิดตอนส่งรายงานใหม่ === */
+@keyframes flameBurst {
+    0% {
+        transform: scale(0.8) translateY(20px);
+        opacity: 0;
+        box-shadow: 0 0 0 rgba(244, 63, 94, 0);
+        background: rgba(244, 63, 94, 0);
+    }
+    30% {
+        transform: scale(1.03) translateY(-4px);
+        opacity: 1;
+        box-shadow: 0 0 35px #f43f5e, 0 0 60px #ec4899, inset 0 0 25px #ff782e;
+        background: rgba(244, 63, 94, 0.3);
+        border-color: #ff782e;
+    }
+    60% {
+        box-shadow: 0 0 20px #ec4899, inset 0 0 10px #7c3aed;
+    }
+    100% {
+        transform: scale(1) translateY(0);
+        box-shadow: 0 0 0 transparent;
+        background: transparent;
+    }
+}
+
+.new-report-flame {
+    animation: flameBurst 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    position: relative;
+    overflow: hidden;
+}
+
+.new-report-flame::before {
+    content: '';
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    width: 100%;
+    height: 200%;
+    background: linear-gradient(to top, rgba(255, 120, 46, 0.8), rgba(244, 63, 94, 0.6), rgba(236, 72, 153, 0.3), transparent);
+    filter: blur(10px);
+    animation: flameRise 0.9s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes flameRise {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-70%); opacity: 0; }
 }
