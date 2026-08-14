@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>นวัตกรรมการตรวจสอบมิจฉาชีพ</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="logo">
+            <span class="logo-text">นวัตกรรม<span>การตรวจสอบมิจฉาชีพ</span></span>
+        </div>
+        <nav>
+            <a href="#usage">การใช้งาน</a>
+            <a href="#terms">ข้อตกลง</a>
+            <a href="#" class="active">เตือนภัยเว็บ</a>
+        </nav>
+    </header>
+
+    <!-- Main Web App Layout -->
+    <main class="app-container">
+        
+        <!-- ฝั่งซ้าย: ค้นหาและผลลัพธ์ -->
+        <section class="left-panel">
+            <div class="card search-card">
+                <h2>ค้นหาข้อมูลมิจฉาชีพ</h2>
+                <div class="search-box">
+                    <input type="text" placeholder="ใส่เบอร์โทรศัพท์ หรือ เลขบัญชี">
+                    <button class="btn-search">🔍</button>
+                </div>
+            </div>
+
+            <div class="card result-card">
+                <h3>ผลการค้นหาล่าสุด</h3>
+                <div class="alert-box" style="display: none;"></div>
+            </div>
+        </section>
+
+        <!-- ฝั่งขวา: แจ้งเหตุและรายงานล่าสุด -->
+        <section class="right-panel">
+            <div class="card form-card">
+                <h3>แจ้งเหตุ/รายงานใหม่</h3>
+                <form>
+                    <div class="form-group">
+                        <label>ระบุเบอร์/บัญชี</label>
+                        <input type="text" placeholder="กรอกเบอร์ หรือ บัญชี">
+                    </div>
+                    <div class="form-group">
+                        <label>ประเภทการโกง</label>
+                        <select>
+                            <option>หลอกโอนเงิน</option>
+                            <option>หลอกขายของ</option>
+                            <option>คอลเซ็นเตอร์</option>
+                        </select>
+                    </div>
+                    <label class="file-upload">
+                        <input type="file" multiple accept="image/*">
+                        <span>หลักฐาน (รูปภาพ)</span>
+                    </label>
+                    <button type="button" class="btn-submit">ส่งรายงาน</button>
+                </form>
+            </div>
+
+            <div class="card recent-card">
+                <h3>รายงานล่าสุด</h3>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ส่วนเนื้อหาการใช้งาน & ข้อตกลง สไตล์ AMD -->
+    <section class="info-sections">
+        
+        <!-- การใช้งาน -->
+        <div id="usage" class="amd-section">
+            <div class="info-header">
+                <span class="section-tag">HOW IT WORKS</span>
+                <h2>วิธีใช้งานระบบตรวจสอบมิจฉาชีพ</h2>
+            </div>
+
+            <div class="usage-steps">
+                <div class="step-item">
+                    <span class="step-title">1. ค้นหาประวัติ</span>
+                    <p>พิมพ์เบอร์โทรศัพท์หรือเลขบัญชีธนาคารลงในช่องค้นหา แล้วกดปุ่มเช็คประวัติมิจฉาชีพได้ทันที</p>
+                </div>
+                <div class="step-item">
+                    <span class="step-title">2. ตรวจสอบผลลัพธ์</span>
+                    <p>ระบบจะแสดงจำนวนครั้งที่มีคนรายงาน พร้อมเตือนระดับความเสี่ยงให้คุณรู้ทันก่อนโอนเงิน</p>
+                </div>
+                <div class="step-item">
+                    <span class="step-title">3. แจ้งเหตุเตือนภัย</span>
+                    <p>หากโดนโกง สามารถกรอกข้อมูลมิจฉาชีพพร้อมแนบหลักฐานการโอนเพื่อเตือนคนอื่นได้ทันที</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ข้อตกลง -->
+        <div id="terms" class="amd-section">
+            <div class="info-header">
+                <span class="section-tag">TERMS & CONDITIONS</span>
+                <h2>ข้อตกลงและเงื่อนไข</h2>
+            </div>
+
+            <div class="terms-grid">
+                <div class="terms-item">
+                    <span class="terms-num">01 / ACCURACY</span>
+                    <span class="step-title">ความถูกต้องของข้อมูล</span>
+                    <p>ผู้ใช้งานต้องรายงานข้อมูลที่เป็นความจริงเท่านั้น การแจ้งข้อมูลเท็จหรือกลั่นแกล้งผู้อื่นถือเป็นความผิดตามกฎหมาย</p>
+                </div>
+                <div class="terms-item">
+                    <span class="terms-num">02 / PRIVACY</span>
+                    <span class="step-title">การคุ้มครองข้อมูล</span>
+                    <p>ระบบจะทำการเซนเซอร์ข้อมูลบางส่วนเพื่อความปลอดภัย และเป็นไปตามมาตรฐานการคุ้มครองข้อมูลส่วนบุคคล (PDPA)</p>
+                </div>
+                <div class="terms-item">
+                    <span class="terms-num">03 / DISCLAIMER</span>
+                    <span class="step-title">ขอบเขตความรับผิดชอบ</span>
+                    <p>ข้อมูลทั้งหมดมีไว้เพื่อเป็นเบาะแสเตือนภัยสังคมเท่านั้น ไม่สามารถใช้อ้างอิงทางกฎหมายแทนเอกสารราชการได้</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</body>
+</html>
