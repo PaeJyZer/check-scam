@@ -536,3 +536,62 @@ select option:checked {
     background-color: #1e293b !important;
     color: #ec4899 !important;
 }
+
+/* === Responsive For Mobile (แปะต่อท้ายสุดไฟล์ style.css) === */
+@media (max-width: 768px) {
+    /* ปรับ Navbar ไม่ให้ล้นจอมือถือ */
+    .navbar {
+        flex-direction: column;
+        gap: 12px;
+        padding: 15px 12px;
+        text-align: center;
+    }
+
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px;
+    }
+
+    nav a {
+        margin-left: 0;
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+
+    /* ปรับระยะขอบหน้าจอและระยะซ้อนการ์ด */
+    .app-container, .info-sections {
+        padding: 0 12px;
+        margin: 20px auto;
+    }
+
+    .card {
+        padding: 18px;
+        margin-bottom: 15px;
+    }
+
+    /* แก้ตัวการทำจอล้น: ปรับ Font Tag จาก 70px เหลือ 28px */
+    .info-header .section-tag {
+        font-size: 28px !important;
+    }
+
+    .info-header h2 {
+        font-size: 20px !important;
+    }
+
+    /* ปรับช่องค้นหาให้พอดีนิ้วกด */
+    .search-box input {
+        padding: 12px 10px;
+        font-size: 13px;
+    }
+
+    .btn-search {
+        padding: 0 16px;
+    }
+
+    /* ปิดเอฟเฟกต์ขยายใหญ่เว่อร์ตอนทัชหน้าจอมือถือ */
+    .step-item:hover, .terms-item:hover {
+        transform: scale(1.02) !important;
+    }
+}
