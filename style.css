@@ -537,60 +537,84 @@ select option:checked {
     color: #ec4899 !important;
 }
 
-/* === Responsive For Mobile (แปะต่อท้ายสุดไฟล์ style.css) === */
+/* === FIX MOBILE NAVBAR & LAYOUT (ทับอันเดิมล่างสุด style.css) === */
 @media (max-width: 768px) {
-    /* ปรับ Navbar ไม่ให้ล้นจอมือถือ */
     .navbar {
-        flex-direction: column;
-        gap: 12px;
-        padding: 15px 12px;
-        text-align: center;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 12px 10px !important;
+        gap: 10px !important;
+    }
+
+    .logo {
+        font-size: 18px !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 4px !important;
+        text-align: center !important;
+    }
+
+    .logo-text span {
+        display: inline-block !important;
+        font-size: 11px !important;
+        padding: 2px 6px !important;
+        white-space: nowrap !important;
     }
 
     nav {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 6px;
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 4px !important;
+        width: 100% !important;
+        margin-left: 0 !important;
     }
 
     nav a {
-        margin-left: 0;
-        padding: 6px 10px;
-        font-size: 13px;
+        margin-left: 0 !important;
+        padding: 6px 10px !important;
+        font-size: 12px !important;
+        white-space: nowrap !important;
     }
 
-    /* ปรับระยะขอบหน้าจอและระยะซ้อนการ์ด */
     .app-container, .info-sections {
-        padding: 0 12px;
-        margin: 20px auto;
+        padding: 0 12px !important;
+        margin: 15px auto !important;
+        grid-template-columns: 1fr !important;
     }
 
     .card {
-        padding: 18px;
-        margin-bottom: 15px;
+        padding: 16px !important;
+        margin-bottom: 15px !important;
     }
 
-    /* แก้ตัวการทำจอล้น: ปรับ Font Tag จาก 70px เหลือ 28px */
-    .info-header .section-tag {
-        font-size: 28px !important;
+    .search-box {
+        display: flex !important;
+        width: 100% !important;
     }
 
-    .info-header h2 {
-        font-size: 20px !important;
-    }
-
-    /* ปรับช่องค้นหาให้พอดีนิ้วกด */
     .search-box input {
-        padding: 12px 10px;
-        font-size: 13px;
+        padding: 10px !important;
+        font-size: 13px !important;
+        flex: 1 !important;
+        min-width: 0 !important;
     }
 
     .btn-search {
-        padding: 0 16px;
+        padding: 0 16px !important;
+        white-space: nowrap !important;
     }
 
-    /* ปิดเอฟเฟกต์ขยายใหญ่เว่อร์ตอนทัชหน้าจอมือถือ */
+    .info-header .section-tag {
+        font-size: 24px !important;
+    }
+
+    .info-header h2 {
+        font-size: 18px !important;
+    }
+
     .step-item:hover, .terms-item:hover {
         transform: scale(1.02) !important;
     }
