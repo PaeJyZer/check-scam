@@ -615,3 +615,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     targetCards.forEach(card => cardObserver.observe(card));
 });
+
+let lastScrollTop = 0;
+const emergencyBox = document.getElementById('emergencyBox');
+
+window.addEventListener('scroll', function() {
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    let windowHeight = window.innerHeight;
+    let documentHeight = document.documentElement.scrollHeight;
+
+    // เช็กว่าเลื่อนลงจนสุดหน้าจอหรือยัง
+    if (scrollTop + windowHeight >= documentHeight - 50) {
+        emergencyBox.classList.remove('hide');
+        emergencyBox.classList.add('minimized'); // หดเหลือแค่ไอคอนวงกลม
+    } else if (scrollTop > lastScrollTop && scrollTop > 100) {
+        // ถ้าเลื่อนลง -> ซ่อนปุ่มไปเลย
+        emergencyBox.classList.add('hide');
+        emergencyBox.classList.remove('minimized');
+    } else {
+        // ถ้าเลื่อนขึ้น -> โผล่ปุ่มเต็มออกมา
+        emergencyBox.classList.remove('hide');
+        emergencyBox.classList.remove('minimized');
+    }
+    
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+});
