@@ -102,11 +102,14 @@ body::after {
 
 /* === Navbar === */
 .navbar {
+    position: sticky; /* เพิ่มให้แท็บลอยติดขอบบนตลอด */
+    top: 0;           /* ล็อกติดขอบบนสุด */
+    z-index: 1000;    /* อยู่ชั้นบนสุดกันโดนธาตุอื่นทับ */
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 18px 50px;
-    background: rgba(15, 23, 42, 0.8);
+    background: rgba(15, 23, 42, 0.85);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(236, 72, 153, 0.3);
     box-shadow: 0 4px 25px rgba(124, 58, 237, 0.2);
@@ -426,6 +429,7 @@ h2, h3 {
     text-transform: uppercase;
     display: block;
     margin-bottom: 8px;
+    
 }
 
 .info-header h2 {
@@ -681,4 +685,55 @@ select option:hover, select option:focus, select option:checked {
 @keyframes flameRise {
     0% { transform: translateY(0); opacity: 1; }
     100% { transform: translateY(-70%); opacity: 0; }
+}
+
+/* โทรหาตำรวจฉุกเฉิน 191 */
+.emergency-box {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 9999; /* ยัด z-index สูงๆ ไว้ จะได้ไม่โดนตัวอื่นทับ */
+}
+
+.btn-emergency {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 22px;
+    background: linear-gradient(135deg, #ef4444 0%, #991b1b 100%);
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 50px; /* ทำมุมมนเป็นทรงแคปซูล ลอยขวาล่างแล้วดูดีกว่า */
+    border: 1px solid rgba(248, 113, 113, 0.8);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(239, 68, 68, 0.6);
+    transition: all 0.3s ease;
+    animation: emergencyPulse 2s infinite ease-in-out;
+}
+
+.btn-emergency:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba(239, 68, 68, 0.9);
+    color: #ffffff;
+}
+
+.pulse-icon {
+    font-size: 18px;
+    animation: blinkIcon 1s infinite alternate;
+}
+
+@keyframes emergencyPulse {
+    0%, 100% {
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(239, 68, 68, 0.6);
+    }
+    50% {
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 30px rgba(239, 68, 68, 1);
+    }
+}
+
+@keyframes blinkIcon {
+    from { opacity: 0.6; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1.1); }
 }
