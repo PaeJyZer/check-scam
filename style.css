@@ -747,14 +747,14 @@ select option:hover, select option:focus, select option:checked {
         flex-direction: column !important;
         align-items: center !important;
         justify-content: center !important;
-        padding: 10px 5px !important;
-        gap: 8px !important;
+        padding: 14px 10px !important; /* เพิ่มความหนาของแถบบน */
+        gap: 10px !important;
     }
 
     .logo {
         display: flex !important;
-        flex-direction: row !important; /* บังคับเรียงแนวนอน */
-        flex-wrap: nowrap !important; /* ห้ามตัดขึ้นบรรทัดใหม่เด็ดขาด */
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
         align-items: center !important;
         justify-content: center !important;
         gap: 6px !important;
@@ -762,14 +762,14 @@ select option:hover, select option:focus, select option:checked {
     }
 
     .logo-main {
-        font-size: 14px !important; /* ย่อขนาดฟอนต์ให้พอยัดลงบรรทัดเดียวได้ */
+        font-size: 16px !important; /* ขยายตัวหนังสือ นวัตกรรม */
         white-space: nowrap !important;
         word-break: keep-all !important;
     }
 
     .logo-sub {
-        font-size: 10px !important; /* ย่อป้ายสีชมพูลงนิดนึง */
-        padding: 2px 5px !important;
+        font-size: 12px !important; /* ขยายปุ่มสีชมพู */
+        padding: 3px 8px !important;
         white-space: nowrap !important;
         word-break: keep-all !important;
     }
@@ -779,15 +779,15 @@ select option:hover, select option:focus, select option:checked {
         flex-direction: row !important;
         justify-content: center !important;
         align-items: center !important;
-        gap: 4px !important;
+        gap: 6px !important;
         width: 100% !important;
         margin: 0 !important;
     }
 
     nav a {
         margin: 0 !important;
-        padding: 5px 8px !important;
-        font-size: 12px !important;
+        padding: 6px 12px !important; /* ขยายปุ่มกดเมนู */
+        font-size: 13px !important; /* ขยายฟอนต์เมนู */
         white-space: nowrap !important;
     }
 
