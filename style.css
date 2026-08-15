@@ -740,3 +740,84 @@ select option:hover, select option:focus, select option:checked {
     from { opacity: 0.6; transform: scale(0.9); }
     to { opacity: 1; transform: scale(1.1); }
 }
+
+/* === นวัตกรรม === */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 10px 5px !important;
+        gap: 8px !important;
+    }
+
+    .logo {
+        display: flex !important;
+        flex-direction: row !important; /* บังคับเรียงแนวนอน */
+        flex-wrap: nowrap !important; /* ห้ามตัดขึ้นบรรทัดใหม่เด็ดขาด */
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 6px !important;
+        width: 100% !important;
+    }
+
+    .logo-main {
+        font-size: 14px !important; /* ย่อขนาดฟอนต์ให้พอยัดลงบรรทัดเดียวได้ */
+        white-space: nowrap !important;
+        word-break: keep-all !important;
+    }
+
+    .logo-sub {
+        font-size: 10px !important; /* ย่อป้ายสีชมพูลงนิดนึง */
+        padding: 2px 5px !important;
+        white-space: nowrap !important;
+        word-break: keep-all !important;
+    }
+
+    nav {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 4px !important;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+
+    nav a {
+        margin: 0 !important;
+        padding: 5px 8px !important;
+        font-size: 12px !important;
+        white-space: nowrap !important;
+    }
+
+    .app-container, .info-sections {
+        padding: 0 12px !important;
+        margin: 15px auto !important;
+    }
+
+    .search-box {
+        display: flex !important;
+        width: 100% !important;
+    }
+
+    .search-box input {
+        padding: 10px !important;
+        font-size: 14px !important;
+        flex: 1 !important;
+        min-width: 0 !important;
+    }
+
+    .btn-search {
+        padding: 0 16px !important;
+        white-space: nowrap !important;
+    }
+
+    .info-header .section-tag {
+        font-size: 28px !important;
+    }
+
+    .info-header h2 {
+        font-size: 20px !important;
+    }
+}
