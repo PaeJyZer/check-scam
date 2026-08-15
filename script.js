@@ -226,8 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const maskedQuery = maskData(rawQuery);
-        resultCard.querySelector('h3').textContent = `ผลการค้นหา: ${maskedQuery}`;
+        resultCard.querySelector('h3').textContent = `ผลการค้นหา: ${rawQuery}`;
         const record = scamDatabase[cleanQuery];
 
         if (record !== undefined) {
@@ -288,7 +287,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 overflow: hidden;
             `;
             alertBox.innerHTML = `
-                <p style="margin:0; font-size: 15px;">❌ <strong style="color: #ffe4e6;">เบอร์/บัญชี: ${maskedQuery}</strong></p>
+                <p style="margin:0; font-size: 15px;">❌ <strong style="color: #ffe4e6;">เบอร์/บัญชี: ${rawQuery}</strong></p>
                 <p style="margin: 6px 0 0 0; color: #f43f5e; font-size: 14px; font-weight: 600;">⚠️ พบประวัติการรายงานทั้งหมด <span style="font-size: 18px; text-shadow: 0 0 8px rgba(244,63,94,0.8);">${record.count}</span> ครั้ง!</p>
                 <div style="max-height: 220px; overflow-y: auto; margin-top: 12px; padding-right: 4px;">
                     ${reportsHtml}
@@ -327,7 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 overflow: hidden;
             `;
             alertBox.innerHTML = `
-                <p style="margin: 0; font-size: 15px; color: #a7f3d0;">✅ <strong>เบอร์/บัญชี: ${maskedQuery}</strong></p>
+                <p style="margin: 0; font-size: 15px; color: #a7f3d0;">✅ <strong>เบอร์/บัญชี: ${rawQuery}</strong></p>
                 <p style="margin: 6px 0 0 0; font-size: 14px; font-weight: 500;">🛡️ ไม่พบประวัติการโกงในระบบ (เบื้องต้นปลอดภัย)</p>
             `;
         }
