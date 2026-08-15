@@ -102,9 +102,9 @@ body::after {
 
 /* === Navbar === */
 .navbar {
-    position: sticky; /* เพิ่มให้แท็บลอยติดขอบบนตลอด */
-    top: 0;           /* ล็อกติดขอบบนสุด */
-    z-index: 1000;    /* อยู่ชั้นบนสุดกันโดนธาตุอื่นทับ */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -574,19 +574,22 @@ select option:hover, select option:focus, select option:checked {
     }
 
     .logo {
-        flex-direction: column !important;
+        flex-direction: row !important; /* จัดให้อยู่แนวนอนเดียวกันบนมือถือ */
+        flex-wrap: nowrap !important; /* ห้ามตัดขึ้นบรรทัดใหม่ */
         align-items: center !important;
-        gap: 4px !important;
+        justify-content: center !important;
+        gap: 8px !important;
         text-align: center !important;
     }
 
     .logo-main {
-        font-size: 20px !important;
+        font-size: 16px !important; /* ย่อฟอนต์นิดนึงเพื่อไม่ให้ล้นจอมือถือ */
+        white-space: nowrap !important; /* ห้ามตัวหนังสือตัดบรรทัดเด็ดขาด */
     }
 
     .logo-sub {
         font-size: 11px !important;
-        padding: 2px 8px !important;
+        padding: 2px 6px !important;
         white-space: nowrap !important;
     }
 
@@ -692,7 +695,7 @@ select option:hover, select option:focus, select option:checked {
     position: fixed;
     bottom: 25px;
     right: 25px;
-    z-index: 9999; /* ยัด z-index สูงๆ ไว้ จะได้ไม่โดนตัวอื่นทับ */
+    z-index: 9999;
 }
 
 .btn-emergency {
@@ -706,7 +709,7 @@ select option:hover, select option:focus, select option:checked {
     font-size: 15px;
     font-weight: 700;
     text-decoration: none;
-    border-radius: 50px; /* ทำมุมมนเป็นทรงแคปซูล ลอยขวาล่างแล้วดูดีกว่า */
+    border-radius: 50px;
     border: 1px solid rgba(248, 113, 113, 0.8);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(239, 68, 68, 0.6);
     transition: all 0.3s ease;
