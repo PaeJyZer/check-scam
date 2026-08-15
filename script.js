@@ -614,29 +614,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }, observerOptions);
 
     targetCards.forEach(card => cardObserver.observe(card));
-});
 
-let lastScrollTop = 0;
-const emergencyBox = document.getElementById('emergencyBox');
+    // === โค้ดดัก Scroll ย้ายเข้ามาในนี้แก้พังเรียบร้อย ===
+    let lastScrollTop = 0;
+    const emergencyBox = document.getElementById('emergencyBox');
 
-window.addEventListener('scroll', function() {
-    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    let windowHeight = window.innerHeight;
-    let documentHeight = document.documentElement.scrollHeight;
+    if (emergencyBox) {
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            let windowHeight = window.innerHeight;
+            let documentHeight = document.documentElement.scrollHeight;
 
-    // เช็กว่าเลื่อนลงจนสุดหน้าจอหรือยัง
-    if (scrollTop + windowHeight >= documentHeight - 50) {
-        emergencyBox.classList.remove('hide');
-        emergencyBox.classList.add('minimized'); // หดเหลือแค่ไอคอนวงกลม
-    } else if (scrollTop > lastScrollTop && scrollTop > 100) {
-        // ถ้าเลื่อนลง -> ซ่อนปุ่มไปเลย
-        emergencyBox.classList.add('hide');
-        emergencyBox.classList.remove('minimized');
-    } else {
-        // ถ้าเลื่อนขึ้น -> โผล่ปุ่มเต็มออกมา
-        emergencyBox.classList.remove('hide');
-        emergencyBox.classList.remove('minimized');
+            if (scrollTop + windowHeight >= documentHeight - 60) {
+                emergencyBox.classList.remove('hide');
+                emergencyBox.classList.add('minimized');
+            } else if (scrollTop > lastScrollTop && scrollTop > 100) {
+                emergencyBox.classList.add('hide');
+                emergencyBox.classList.remove('minimized');
+            } else {
+                emergencyBox.classList.remove('hide');
+                emergencyBox.classList.remove('minimized');
+            }
+            
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        });
     }
-    
-    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
 });
